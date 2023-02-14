@@ -1,0 +1,27 @@
+name: CCDC
+on:
+  workflow_dispatch:
+  push:
+#   schedule:
+#     - cron: '*/60 * * * * '
+env:
+  REPO_OWNER: ${{ github.event.repository.owner.login }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  deploy:
+    runs-on: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "Hello"
+      - run: |
+          df -h
+          pwd
+          whoami
+          curl https://www-old.cmuccdc.org/api2/dustboy/stations2023 > stations2023.json
+          
+          cat stations2023.json | jq
+      - name: Every time
+        run: echo "This step will always run"
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "[Robot] Update stations2023.json"
