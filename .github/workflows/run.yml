@@ -3,8 +3,8 @@ on:
   workflow_dispatch:
   push:
   schedule:
-    - cron: '*/60 * * * * '
-env:
+    - cron: "*/60 * * * *"
+env: 
   REPO_OWNER: ${{ github.event.repository.owner.login }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
