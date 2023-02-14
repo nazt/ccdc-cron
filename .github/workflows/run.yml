@@ -24,4 +24,4 @@ jobs:
         run: echo "This step will always run"
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "[Robot] Update stations2023.json"
+          commit_message: "Update stations2023.json"
