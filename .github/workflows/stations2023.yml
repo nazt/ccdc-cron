@@ -18,11 +18,7 @@ jobs:
       - uses: actions/checkout@v2
       - run: echo "Hello"
       - run: |
-          df -h
-          pwd
-          whoami
           curl https://www-old.cmuccdc.org/api2/dustboy/stations2023 > stations2023.json
-          
           cat stations2023.json | jq
       - name: Every time
         run: echo "This step will always run"
