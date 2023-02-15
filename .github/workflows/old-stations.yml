@@ -1,0 +1,27 @@
+name: OLD STATIONS
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron: "*/5 * * * *"
+env: 
+  REPO_OWNER: ${{ github.event.repository.owner.login }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  deploy:
+    runs-on: [ubuntu-latest]
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the
+      # added or changed files to the repository.
+      contents: write    
+    steps:
+      - uses: actions/checkout@v2
+      - run: echo "Hello"
+      - run: |
+          curl https://www-old.cmuccdc.org/api2/dustboy/stations > old.stations.json
+          cat old.stations.json | jq
+      - name: Every time
+        run: echo "This step will always run"
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Update old.stations.json"
